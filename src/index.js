@@ -4,7 +4,7 @@ const twilio = require("twilio");
 const app = express();
 require("dotenv").config();
 const port = process.env.PORT || 3011;
-const client = new twilio(
+const client = twilio(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
@@ -13,7 +13,7 @@ app.post("/makecall", (req, res) => {
     const {number} = req.query;
   client.calls
     .create({
-      url: `http://185.201.8.224:${port}/twiml`,
+      url: `${process.env.URL}:${port}/twiml`,
       to: number,
       from: "+0987654321",
     })
